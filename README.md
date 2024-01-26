@@ -1,7 +1,7 @@
 # The complex-step Newton method
 Here we present some implementations in Python and in Matlab of the complex-step Newton method. For more information please refer to the book 
 
-"Computational Mathematics" 
+"Computational Mathematics" https://www.dmitsotakis.com/computational-mathematics
 
 and on the manuscript 
 
