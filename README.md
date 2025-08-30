@@ -5,6 +5,6 @@ Here we present some implementations in Python and in Matlab of the complex-step
 
 and on the manuscript 
 
-"The complex-step Newton method and its convergence" https://arxiv.org/abs/2312.08395
+"The complex-step Newton method and its convergence" https://link.springer.com/article/10.1007/s00211-025-01471-w
 
 by D. Mitsotakis.
