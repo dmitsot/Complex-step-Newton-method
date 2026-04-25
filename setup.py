@@ -28,7 +28,11 @@ if sys.platform == "darwin":
             "-Xpreprocessor", "-fopenmp",
             f"-I{prefix}/include",
         ]
-        extra_link_args += [f"-L{prefix}/lib", "-lomp"]
+        static_libomp = f"{prefix}/lib/libomp.a"
+        if __import__("os").path.exists(static_libomp):
+            extra_link_args += [static_libomp]   # static: no delocate needed
+        else:
+            extra_link_args += [f"-L{prefix}/lib", "-lomp"]  # dynamic fallback
     except Exception:
         pass  # libomp not found — OpenMP disabled, pragmas are silently ignored
 elif sys.platform.startswith("linux"):
