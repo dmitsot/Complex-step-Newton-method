@@ -66,7 +66,8 @@ template<typename T> std::complex<T> my_conj(const std::complex<T>& x) { return 
 template<typename T> using Real = typename real_type<T>::type;
 
 // OpenMP does not know how to reduce std::complex out of the box.
-#ifdef _OPENMP
+// declare reduction requires OpenMP 4.0+; MSVC only supports OpenMP 2.0.
+#if defined(_OPENMP) && !defined(_MSC_VER)
 #pragma omp declare reduction(+ : std::complex<float>  \
     : omp_out += omp_in) initializer(omp_priv = {})
 #pragma omp declare reduction(+ : std::complex<double> \
@@ -78,7 +79,9 @@ Scalar vec_dot(const std::vector<Scalar>& u, const std::vector<Scalar>& v)
 {
     Scalar s{};
     const int n = static_cast<int>(u.size());
+#if defined(_OPENMP) && !defined(_MSC_VER)
     #pragma omp parallel for reduction(+:s) schedule(static)
+#endif
     for (int i = 0; i < n; ++i) s += my_conj(u[i]) * v[i];
     return s;
 }
