@@ -10,6 +10,7 @@ The C++ code already guards every OpenMP call with #ifdef _OPENMP, so the
 package builds and runs correctly without OpenMP (single-threaded).
 """
 
+import os
 import subprocess
 import sys
 
@@ -24,11 +25,12 @@ if sys.platform == "darwin":
         prefix = subprocess.check_output(
             ["brew", "--prefix", "libomp"], stderr=subprocess.DEVNULL
         ).decode().strip()
-        extra_compile_args += [
-            "-Xpreprocessor", "-fopenmp",
-            f"-I{prefix}/include",
-        ]
-        extra_link_args += [f"-L{prefix}/lib", "-lomp"]
+        if os.path.isfile(os.path.join(prefix, "lib", "libomp.dylib")):
+            extra_compile_args += [
+                "-Xpreprocessor", "-fopenmp",
+                f"-I{prefix}/include",
+            ]
+            extra_link_args += [f"-L{prefix}/lib", "-lomp"]
     except Exception:
         pass  # libomp not found — OpenMP disabled, pragmas are silently ignored
 elif sys.platform.startswith("linux"):
