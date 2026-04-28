@@ -2,7 +2,7 @@
 
 **Newton-GMRES/LGMRES solver using the complex-step Jacobian-vector product.**
 
-It solve scalar or vector **real** equations of the form F(x)=0 using the complex-step Newton method.
+This code offers a function that solves scalar or vector **real** equations of the form F(x)=0 using the complex-step Newton method. The implementation is in C++ with a Python interface.
 
 The Jacobian-vector product `J(x)·u` is never formed explicitly. Instead it is
 approximated by a single extra function evaluation at a complex point:
