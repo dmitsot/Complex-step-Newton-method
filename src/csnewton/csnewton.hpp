@@ -7,7 +7,7 @@
 //     complex (complex<double>) scalar types.
 //
 //   csnewton::csnewton(F, [precon,] x, [params...])
-//     Newton-Krylov solver: F(x)=0 via Newton iteration, each linear system
+//     Newton-Krylov solver: F(x)=0 via complex-step Newton iteration, each linear system
 //     solved by GMRES using the complex-step Jacobian-vector product:
 //       J(x)*u  ~=  Im[ F(x + i*h*u) ] / h        (h ~ 1e-20)
 //     F must be callable for both vector<double> and vector<complex<double>>.
